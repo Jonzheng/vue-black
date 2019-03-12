@@ -69,7 +69,6 @@ export default {
   watch: {
     $route: {
       handler: function(route) {
-        console.log(route)
         this.redirect = route.query && route.query.redirect
       },
       immediate: true
@@ -89,7 +88,6 @@ export default {
           this.loading = true
           this.$store.dispatch('Login', this.loginForm).then((response) => {
             this.loading = false
-            console.log(this.redirect || '/')
             this.$router.push({ path: this.redirect || '/' })
           }).catch(() => {
             this.loading = false

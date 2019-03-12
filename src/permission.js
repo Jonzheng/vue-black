@@ -11,8 +11,6 @@ const whiteList = ['/login'] // 不重定向白名单
 router.beforeEach((to, from, next) => {
   NProgress.start()
   const token = getToken()
-  console.log(from.path, '-->', to.path)
-  console.log('token:', token)
   if (token && token !== 'undefined') {
     if (to.path === '/login') {
       next({ path: '/' })
@@ -35,11 +33,9 @@ router.beforeEach((to, from, next) => {
       */
     }
   } else {
-    console.log('no token')
     if (whiteList.indexOf(to.path) !== -1) {
       next()
     } else {
-      console.log('redirect:', to.path)
       next(`/login?redirect=${to.path}`) // 否则全部重定向到登录页
       NProgress.done()
     }

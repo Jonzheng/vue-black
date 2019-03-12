@@ -1,4 +1,4 @@
-import { login, logout, getInfo } from '@/api/login'
+import { login, getInfo } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 
 const user = {
@@ -31,7 +31,6 @@ const user = {
       return new Promise((resolve, reject) => {
         login(userInfo).then(response => {
           const data = response.data
-          console.log(data)
           let token = ''
           if (data) {
             const user = data.data[0]
@@ -39,7 +38,6 @@ const user = {
             commit('SET_NAME', user.nick_name)
             commit('SET_AVATAR', user.avatar_url)
           }
-          console.log(token)
           setToken(token)
           commit('SET_TOKEN', token)
           resolve()
@@ -72,14 +70,10 @@ const user = {
     // 登出
     LogOut({ commit, state }) {
       return new Promise((resolve, reject) => {
-        logout(state.token).then(() => {
-          commit('SET_TOKEN', '')
-          commit('SET_ROLES', [])
-          removeToken()
-          resolve()
-        }).catch(error => {
-          reject(error)
-        })
+        commit('SET_TOKEN', '')
+        commit('SET_ROLES', [])
+        removeToken()
+        resolve()
       })
     },
 

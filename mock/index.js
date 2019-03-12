@@ -1,3 +1,4 @@
+/*
 import Mock from 'mockjs'
 import userAPI from './user'
 import tableAPI from './table'
@@ -24,3 +25,4 @@ Mock.mock(/\/user\/logout/, 'post', userAPI.logout)
 Mock.mock(/\/table\/list/, 'get', tableAPI.list)
 
 export default Mock
+*/
